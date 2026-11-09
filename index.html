@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#101a35" />
+  <meta name="description" content="A responsive live weather dashboard powered by Open-Meteo." />
+  <title>SkyCast — Weather Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="SkyCast home">
+        <span class="brand-mark">☀</span><span>skycast<span class="brand-dot">.</span></span>
+      </a>
+      <div class="topbar-note"><span class="live-dot"></span> LIVE WEATHER</div>
+    </header>
+
+    <section class="intro">
+      <div>
+        <p class="eyebrow">WEATHER AT A GLANCE</p>
+        <h1>Find your <span>forecast.</span></h1>
+        <p class="intro-copy">A little clarity for whatever the day brings.</p>
+      </div>
+      <form class="search-form" id="searchForm" role="search">
+        <span class="search-icon" aria-hidden="true">⌕</span>
+        <label class="sr-only" for="cityInput">Search city</label>
+        <input id="cityInput" type="search" placeholder="Search a city..." autocomplete="off" required />
+        <button id="searchButton" type="submit">Search <span aria-hidden="true">→</span></button>
+      </form>
+    </section>
+
+    <div class="quick-cities" aria-label="Popular cities">
+      <span>Try:</span>
+      <button type="button" class="city-chip" data-city="Madurai">Madurai</button>
+      <button type="button" class="city-chip" data-city="Chennai">Chennai</button>
+      <button type="button" class="city-chip" data-city="Mumbai">Mumbai</button>
+      <button type="button" class="city-chip" data-city="Bengaluru">Bengaluru</button>
+    </div>
+
+    <div id="statusMessage" class="status-message" role="status" aria-live="polite">Search for a city to see its latest weather.</div>
+
+    <section id="weatherContent" class="weather-content" hidden>
+      <section class="hero-card">
+        <div class="hero-main">
+          <div class="location-line">
+            <span class="pin-icon">⌖</span>
+            <div><h2 id="cityName">—</h2><p id="locationMeta">—</p></div>
+          </div>
+          <div class="temperature-row">
+            <div>
+              <div class="temperature"><span id="temperature">--</span><sup>°C</sup></div>
+              <p id="condition" class="condition">—</p>
+              <p id="feelsLike" class="feels-like">Feels like --°</p>
+            </div>
+            <div class="weather-art" id="weatherArt" aria-hidden="true">☀️</div>
+          </div>
+          <p class="updated" id="updatedAt">Current conditions</p>
+        </div>
+        <div class="hero-side">
+          <div class="side-heading">TODAY'S OUTLOOK</div>
+          <p id="outlookText">Weather details will appear here.</p>
+          <div class="sun-times">
+            <div><span class="sun-symbol">↑</span><div><small>SUNRISE</small><strong id="sunrise">--:--</strong></div></div>
+            <div><span class="sun-symbol sunset">↓</span><div><small>SUNSET</small><strong id="sunset">--:--</strong></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="metrics-grid" aria-label="Current weather details">
+        <article class="metric-card"><div class="metric-top"><span>Humidity</span><span class="metric-icon">◌</span></div><strong id="humidity">--%</strong><div class="metric-foot">Relative humidity</div></article>
+        <article class="metric-card"><div class="metric-top"><span>Wind speed</span><span class="metric-icon">≋</span></div><strong id="wind">-- <small>km/h</small></strong><div class="metric-foot">10 m above ground</div></article>
+        <article class="metric-card"><div class="metric-top"><span>Pressure</span><span class="metric-icon">◉</span></div><strong id="pressure">-- <small>hPa</small></strong><div class="metric-foot">Surface pressure</div></article>
+        <article class="metric-card"><div class="metric-top"><span>UV index</span><span class="metric-icon">✳</span></div><strong id="uvIndex">--</strong><div class="metric-foot" id="uvLabel">Today's maximum</div></article>
+      </section>
+
+      <section class="forecast-section">
+        <div class="section-heading"><div><p class="eyebrow">THE NEXT FEW HOURS</p><h3>Hourly forecast</h3></div><span class="section-caption">Local time</span></div>
+        <div class="hourly-list" id="hourlyForecast"></div>
+      </section>
+
+      <section class="forecast-section daily-section">
+        <div class="section-heading"><div><p class="eyebrow">PLAN AHEAD</p><h3>5-day forecast</h3></div><span class="section-caption">Coming up</span></div>
+        <div class="daily-list" id="dailyForecast"></div>
+      </section>
+    </section>
+
+    <footer class="footer">
+      <span>Made for curious skies.</span>
+      <span>Weather data by <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Open-Meteo</a></span>
+    </footer>
+  </main>
+</body>
+</html>
